@@ -10,6 +10,14 @@ use POSIX ":sys_wait_h";
 use Test::More;
 use lib '../lib';
 
+BEGIN {
+if(not $ENV{HAS_POSTGRES}) {
+    ok 1, 'need postgres to be running to test.  Set HAS_POSTGRES environmental to enable tests.';
+    done_testing();
+    exit 0;
+}
+}
+
 use_ok('App::MultiModule::Tasks::DocGateway');
 
 BEGIN {
